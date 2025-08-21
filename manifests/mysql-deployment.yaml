@@ -12,24 +12,24 @@ spec:
     metadata:
       labels:
         app: mysql
-  spec:
-    containers:
-      - name: mysql
-        image: mysql:8.0
-        env:
-          - name: MYSQL_ROOT_PASSWORD
-            value: rootpass
-          - name: MYSQL_DATABASE
-            value: appdb
-          - name: MYSQL_USER
-            value: app
-          - name: MYSQL_PASSWORD
-            value: apppass
-        ports:
-          - containerPort: 3306
-        volumeMounts:
-          - name: mysql-persistent-storage
-            mountPath: /var/lib/mysql
-    volumes:
-      - name: mysql-persistent-storage
-        emptyDir: {}
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:8.0
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: rootpass
+            - name: MYSQL_DATABASE
+              value: appdb
+            - name: MYSQL_USER
+              value: app
+            - name: MYSQL_PASSWORD
+              value: apppass
+          ports:
+            - containerPort: 3306
+          volumeMounts:
+            - name: mysql-persistent-storage
+              mountPath: /var/lib/mysql
+      volumes:
+        - name: mysql-persistent-storage
+          emptyDir: {}   # ⚠️ Ephemeral (lost on restart). Use PersistentVolumeClaim in real setups.
